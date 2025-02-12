@@ -16,5 +16,6 @@ I'm Andrey Karpovich and this is my demo Angular app  with drag&drop calendar ev
 
 ![calendar_2](https://github.com/user-attachments/assets/31d1ff88-7d64-4b0b-887b-ebd53922d851)
 
+![calendar_](https://github.com/user-attachments/assets/5d3961b1-7d27-4b19-a130-1844890ece29)
 
 
