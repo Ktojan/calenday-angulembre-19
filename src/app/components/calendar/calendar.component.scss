@@ -1,0 +1,63 @@
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+  .pe-calendar-day-view {
+    padding: 0 2rem;
+    flex: 1 1;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
+    .mat-mdc-card {
+      margin: 0 10%;
+      border: 4px solid #673ab7; //todo var
+
+      @media (max-width: 768px) {
+        margin: 0;
+      }
+
+      &-header {
+        border-bottom: 2px solid gray;
+          padding: 2rem;
+          font-size: xx-large;
+
+          @media (max-width: 768px) {
+            padding: 5px
+          }
+      }
+      &-content {
+        overflow-y: hidden;
+      }
+    }
+
+    .mat-calendar {
+      height: 400px;
+      font-size: 20px;
+    }
+
+    .pe-calendar-day-and-date {
+      text-align: center;
+      display: inline-block;
+
+      .pe-calendar-day-of-week {
+        color: rgb(26, 115, 232);
+        margin: 0;
+      }
+      .pe-calendar-date {
+        background-color: rgb(26, 115, 232);
+        color: #ffffff;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        line-height: 48px;
+        text-align: center;
+        margin-top: 4px;
+        margin-bottom: 0;
+        font-size: 24px;
+      }
+    }
+  }
+

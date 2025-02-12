@@ -1,0 +1,30 @@
+.mat-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+}
+.main {
+  background-image: url('../../public/backgr.jpg');
+  background-size: cover;
+  padding: 2rem;
+  min-height: 100%;
+
+  @media (max-width: 768px) {
+    padding: 5px;
+  }
+}
+
+.calendar-container {
+  display: flex;
+
+  @media (max-width: 998px) {
+    flex-direction: column-reverse;
+  }
+
+  .calendar {
+    flex: 0 1 320px;
+    height: fit-content;
+    border: 2px solid #673ab7; //todo var
+
+  }
+
+}

@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="flex-between">
+    <div class="flex vert-center">
+      <img [routerLink]="'/'" style="margin: 0 2rem; height: 55px; border-radius: 8px;"
+      src="/carp_01.jpeg" alt="logo flying carp">
+      <h2> Calenday, Angulembre 19, 2025 </h2>
+    </div>
+    <a [routerLink]="['/']" mat-icon-button><mat-icon>home</mat-icon></a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<main class="main">
+  <div class="calendar-container">
+
+   <router-outlet></router-outlet> <!-- slot picker and events list area -->
+
+  <mat-card class="calendar">
+    <mat-calendar  [selected]="selectedDate" (selectedChange)="onSelect($event)"></mat-calendar>
+  </mat-card>
+  </div>
+</main>

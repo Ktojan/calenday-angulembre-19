@@ -1,0 +1,29 @@
+<div class="booking-modal">
+  <h3 mat-dialog-title>{{ isEditingMode ? (data.date | date: 'fullDate') : 'Create event'}}</h3>
+  <mat-dialog-content class="booking-modal-content">
+    <form [formGroup]="formGroup">
+      <mat-form-field class="booking-modal-field">
+        <mat-label>Event name</mat-label>
+        <input matInput formControlName="title"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Choose duration</mat-label>
+        <mat-select formControlName="duration">
+          @for(timeOption of timeOptions; track timeOption.value) {
+            <mat-option  [value]="timeOption.value">{{timeOption.label}}</mat-option>
+           }
+        </mat-select>
+      </mat-form-field>
+    </form>
+  <hr>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    @if(isEditingMode) {
+    <button mat-flat-button style="color: red" (click)="delete()">Delete</button>
+    }
+    <button mat-flat-button style="color: green" (click)="saveEvent()" [disabled]="!formGroup.valid">
+      Save
+    </button>
+    <button mat-button (click)="closeDialog()">Cancel</button>
+  </mat-dialog-actions>
+</div>
