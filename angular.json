@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "calenday-angulembre-19": {
+    "calenday-angulembre-20": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/calenday-angulembre-19",
+            "outputPath": "dist/calenday-angulembre-20",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "calenday-angulembre-19:build:production"
+              "buildTarget": "calenday-angulembre-20:build:production"
             },
             "development": {
-              "buildTarget": "calenday-angulembre-19:build:development"
+              "buildTarget": "calenday-angulembre-20:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,7 +89,8 @@
     "schematicCollections": [
       "angular-eslint",
       "@schematics/angular"
-    ]
+    ],
+    "analytics": false
   },
   "schematics": {
     "@schematics/angular:component": {
