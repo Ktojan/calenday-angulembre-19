@@ -14,7 +14,7 @@
         <div class="event-scheduler-time-slot" (click)="clickScheduleArea(slot)" cdkDrag cdkDragDisabled></div>
       }
     </div>
-    @for (event of events$(); track event; let idx = $index, isEven = $even) {
+    @for (event of (events$ | async); track event; let idx = $index, isEven = $even) {
 
       <div class="event-scheduler-event-slots" cdkDropList [cdkDropListData]="event"
         [cdkDropListEnterPredicate]="canDragEventEnter" [ngStyle]="defineStyle(event)">
