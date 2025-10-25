@@ -2,6 +2,10 @@
 
 I'm Andrey Karpovich and this is my demo Angular app  with drag&drop calendar events style.
 
+# UPDATES: 
+
+- October 2025: Upgrade to Angular 20
+
 # Implemented features: 
 
 - Angular 19 new style excluding Signals api (accent on "good old" RxJS)
