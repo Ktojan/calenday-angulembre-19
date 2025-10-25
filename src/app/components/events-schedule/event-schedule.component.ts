@@ -1,16 +1,19 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, Input, OnChanges } from '@angular/core';
 import {
-  CdkDrag,
-  CdkDragDrop,
-  CdkDragPreview,
-  CdkDropList,
-  CdkDropListGroup,
-} from '@angular/cdk/drag-drop';
+  ChangeDetectionStrategy,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  Input,
+  OnChanges, signal,
+  Signal,
+} from '@angular/core';
+import { CdkDrag, CdkDragDrop, CdkDragPreview, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CalendarService, DateToNumeric, timeToTimeString } from '../../shared/calendar.service';
 import { IEvent } from '../../shared/interfaces';
 import { Observable, of, Subscription } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'event-schedule',
@@ -25,12 +28,13 @@ import { Observable, of, Subscription } from 'rxjs';
   ],
   templateUrl: './event-schedule.component.html',
   styleUrl: './event-schedule.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventScheduleComponent implements OnChanges {
-  @Input() selectedDate!: Date;
-  events$: Observable<IEvent[]> = of([]);
+  @Input() selectedDate: Date = new Date();
   calendarService = inject(CalendarService);
+  events$ = toSignal(this.calendarService.getEventsByDate(DateToNumeric(this.selectedDate)));
   dialog = inject(MatDialog);
   hours = Array.from({ length: 24 }, (el, index) => index);
   timeSlots = Array.from({ length: 96 }, (el, index) => index); // 4 slots in each hour
@@ -39,7 +43,7 @@ export class EventScheduleComponent implements OnChanges {
   timeToTimeString = timeToTimeString;
 
   ngOnChanges() {
-    this.events$ = this.calendarService.getEventsByDate(DateToNumeric(this.selectedDate));
+    // this.events$ = toSignal(this.calendarService.getEventsByDate(DateToNumeric(this.selectedDate)));
   }
 
   clickScheduleArea(target: IEvent | number, isEditing?: boolean) { //method for both create new and edit existing
