@@ -9,24 +9,32 @@
 
   <div class="event-scheduler-minute-container" cdkDropListGroup>
     <div id="cdk-container" class="event-scheduler-minutes" cdkDropList [cdkDropListData]="timeSlots"
-      (cdkDropListDropped)="drop($event)">
+         (cdkDropListDropped)="drop($event)">
       @for (slot of timeSlots; track slot) {
         <div class="event-scheduler-time-slot" (click)="clickScheduleArea(slot)" cdkDrag cdkDragDisabled></div>
       }
     </div>
     @for (event of (events$ | async); track event; let idx = $index, isEven = $even) {
-
       <div class="event-scheduler-event-slots" cdkDropList [cdkDropListData]="event"
-        [cdkDropListEnterPredicate]="canDragEventEnter" [ngStyle]="defineStyle(event)">
+           [cdkDropListEnterPredicate]="canDragEventEnter" [ngStyle]="defineStyle(event)">
+        <!--        @if (!event.allDay) {-->
         <div #eventSlot="cdkDrag" class="event-scheduler-event-slot" cdkDragLockAxis="y" cdkDrag
-          [class.pointer-events-none]="eventSlot._dragRef.isDragging()"
-          (click)="clickScheduleArea(event, true)">
+             [class.pointer-events-none]="eventSlot._dragRef.isDragging()"
+             (click)="clickScheduleArea(event, true)">
           {{ event.title }}
         </div>
+        <!--        }-->
         <div *cdkDragPreview class="event-scheduler-event-slot">
         </div>
       </div>
     }
+
+    <div class="event-scheduler-allday-slot" (click)="clickScheduleArea()">
+      @for (event of (allDayEvents$ | async); track event) {
+        <span class="allday-label" (click)="clickScheduleArea(event, true); $event.stopPropagation()">{{ event.title }}</span>
+      }
+    </div>
+
   </div>
 </div>
 

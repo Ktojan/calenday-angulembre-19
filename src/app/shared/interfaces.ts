@@ -1,10 +1,11 @@
 export interface IEvent {
   title: string;
   date: Date | string;
-  timeRange: {
+  timeRange?: {
     start: number;
     end: number;
   };
+  allDay?: boolean;
   id?: string;
   intersectionSiblings?: number;
 }

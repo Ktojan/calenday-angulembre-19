@@ -25,14 +25,13 @@ export class CalendarService {
           (ev.date as string).slice(0, 10) === requestedDate)
         ),
         tap((events: IEvent[]) => {if(events && events.length > 0) this.recalculateStartPoints(events)}),
-        map((events: IEvent[]) => events.map(ev => ({...ev, intersectionSiblings: this.startPoints[ev.timeRange.start]-1 || 0}) )),
-        tap(console.log),
+        map((events: IEvent[]) => events.map(ev => ({...ev, intersectionSiblings: this.startPoints[ev.timeRange?.start]-1 || 0}) )),
       ))
     )
   }
 
   private recalculateStartPoints(events: IEvent[] ) {
-    const starts = events.map((ev:IEvent) => ev.timeRange.start);
+    const starts = events.map((ev:IEvent) => ev.timeRange?.start);
     this.startPoints = starts.reduce((acc, current) => {
       if (acc[current]) acc[current] = acc[current]+1; else acc[current] = 1;
       return acc;
@@ -91,4 +90,11 @@ export function timeToTimeString(hour: number, minute: number) {
 
   return `${formattedHour} : ${formattedMinute}`;
 }
+
+export function addDays(date: Date, days: number) {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
 

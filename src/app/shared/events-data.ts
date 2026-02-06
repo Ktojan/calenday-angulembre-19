@@ -1,7 +1,9 @@
 import { IEvent } from './interfaces';
+import {addDays} from './calendar.service';
 
 export class EventsData {
   static events: IEvent[] = [
+    ////----------------------------------------  CURRENT (ZERO) DAY  --------------------------------////
     {
       timeRange: {
         start: 20,
@@ -94,6 +96,15 @@ export class EventsData {
       id: "b29d38ef-69c4-4d51-b125-f0580983f46c",
     },
     {
+      date: new Date(),
+      title: "Buy girlfriend`s favorite flowers for evening excuse",
+      timeRange: {
+        start: 72,
+        end: 73
+      },
+      id: "b29d38ef-69c4-4d51-b125-f0580983777c",
+    },
+    {
       timeRange: {
         start: 92,
         end: 93
@@ -101,6 +112,112 @@ export class EventsData {
       title: "15 min - finally some rest in peace (but not death!)",
       date: new Date(),
       id: "aca1670c-a6fb-4810-b919-5c1dba67ba36"
+    },
+    ////-------------  ALLDAY EVENTS ----------////
+    {
+      allDay: true,
+      date: new Date(),
+      title: 'Don`t surf world news',
+      id: '006e9d9e-12f7-4897-b0ea-23587136d0e1',
+    },
+    {
+      allDay: true,
+      title: 'Be gentle with girlfriend',
+      date: new Date(),
+      id: '006e9d9e-12f7-4897-b0ea-23587136d0e2',
+    },
+    ////----------------------------------------  SECOND DAY  --------------------------------////
+    {
+      timeRange: {
+        start: 11,
+        end: 14
+      },
+      title: "Some unplanned sex with girlfriend. Yeah",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba0-1"
+    },
+    {
+      timeRange: {
+        start: 31,
+        end: 33
+      },
+      title: "Strategic Coffee Refill & Email Avoidance Session",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba01"
+    },
+    {
+      timeRange: {
+        start: 31,
+        end: 34
+      },
+      title: "Quarterly “We’re Still Aligned” Alignment Check",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba02"
+    },{
+      timeRange: {
+        start: 36,
+        end: 41
+      },
+      title: "Productive Nodding During Video Call",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba03"
+    },
+    {
+      timeRange: {
+        start: 43,
+        end: 44
+      },
+      title: "Status Update: Status Unchanged",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba04"
+    },{
+      timeRange: {
+        start: 43,
+        end: 48
+      },
+      title: "Professional Staring at Spreadsheet",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba05"
+    },
+    {
+      timeRange: {
+        start: 58,
+        end: 61
+      },
+      title: "Weekly Optimism Sync",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba06"
+    },
+    {
+      timeRange: {
+        start: 52,
+        end: 55
+      },
+      title: "Metrics Review: Numbers with Feelings",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba07"
+    },
+    {
+      timeRange: {
+        start: 72,
+        end: 74
+      },
+      title: "End-of-Day Productivity Victory Lap",
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba08"
+    },
+    ////-------------  ALLDAY EVENTS ----------////
+    {
+      allDay: true,
+      date: addDays(new Date(), 1),
+      title: 'Calendar Tetris: Fitting +1 Meeting',
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba95"
+    },
+    {
+      allDay: true,
+      title: 'Deadline Negotiation With Reality',
+      date: addDays(new Date(), 1),
+      id: "aca1670c-a6fb-4810-b919-5c1dba67ba96"
     },
   ]
 }
