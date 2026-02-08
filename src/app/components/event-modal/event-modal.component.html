@@ -1,29 +1,33 @@
 <div class="booking-modal">
   <h3 mat-dialog-title>{{ isEditingMode ? (data.date | date: 'fullDate') : 'Create event'}}</h3>
   <mat-dialog-content class="booking-modal-content">
-    <form [formGroup]="formGroup">
+    <form [formGroup]="eventForm">
       <mat-form-field class="booking-modal-field">
-        <mat-label>Event name</mat-label>
+        <mat-label>Provide event name</mat-label>
         <input matInput formControlName="title"/>
       </mat-form-field>
+      @if(!allDayControl.value) {
       <mat-form-field>
         <mat-label>Choose duration</mat-label>
-        <mat-select formControlName="duration">
+        <mat-select formControlName="duration" [disabled]="allDayControl.value" [matTooltip]="showHint ? 'the event will be placed at the top, drag it to desired time slot' : ''">
           @for(timeOption of timeOptions; track timeOption.value) {
             <mat-option  [value]="timeOption.value">{{timeOption.label}}</mat-option>
            }
         </mat-select>
       </mat-form-field>
+      }
+      <mat-checkbox style="margin: 0 10px;" [formControl]="allDayControl" [disabled]="data.allDay !== undefined">All day long</mat-checkbox>
     </form>
   <hr>
   </mat-dialog-content>
   <mat-dialog-actions>
-    @if(isEditingMode) {
-    <button mat-flat-button style="color: red" (click)="delete()">Delete</button>
-    }
-    <button mat-flat-button style="color: green" (click)="saveEvent()" [disabled]="!formGroup.valid">
-      Save
+<!--    [disabled]="!eventForm.valid"-->
+    <button mat-flat-button style="color: green" (click)="saveEvent()">
+      SAVE
     </button>
     <button mat-button (click)="closeDialog()">Cancel</button>
+    @if(isEditingMode) {
+      <button mat-flat-button style="color: red" (click)="delete()">Delete</button>
+    }
   </mat-dialog-actions>
 </div>

@@ -3,9 +3,9 @@
   height: 100%;
   margin: auto;
   padding: 4px;
-  background-color: #673ab7;
-  border: 1px yellow solid;
-  color: yellow;
+  background-color: var(--color-violet);
+  border: 1px var(--color-yellow) solid;
+  color: var(--color-yellow);
   font-size: 14px;
   border-radius: 4px;
   justify-content: center;
@@ -38,6 +38,13 @@
     }
   }
 
+  .huge-message {
+    position: absolute;
+    top: 40vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   .event-scheduler-minute-container {
     flex: 1;
     position: relative;
@@ -58,11 +65,37 @@
         background-color: #b3e5fc;
       }
     }
+    .event-scheduler-allday-slot {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4.5%;
+      background-color: var(--color-yellow);
+      border: 1px var(--color-violet) solid;
+      color: var(--color-violet);
+      writing-mode: vertical-rl;
+      padding: 10px 3px;
+      cursor: crosshair;
+
+      .allday-label {
+        transform: rotateZ(180deg);
+        display: inline-block;
+        border: 2px dotted gray;
+        border-radius: 3px;
+        padding: 12px 2px;
+        cursor: pointer;
+        margin: 6px auto;
+        font-weight: 600;
+        font-size: large;
+      }
+    }
 
     .event-scheduler-event-slots {
       position: absolute;
       right: 0;
     }
+
 
     .event-scheduler-event-slot { // single event look
       @include event_slot

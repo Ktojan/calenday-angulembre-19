@@ -1,5 +1,35 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  --color-violet: #34495e;
+  --color-yellow: #f1c40f;
+  --color-orange: #e67e22;
+
+  @include mat.dialog-overrides(( //Modals
+    actions-alignment: 'space-evenly',
+    subhead-color: var(--color-violet),
+    supporting-text-color: var(--color-yellow),
+    content-padding: 20px,
+  ));
+  @include mat.progress-bar-overrides((
+    active-indicator-color: var(--color-yellow),
+    track-color: var(--color-violet),
+    track-height: 30px,
+    active-indicator-height: 12px,
+  ));
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: var(--color-orange),
+  ));
+}
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h3 {
+  color: var(--color-orange);
+  text-align: center;
+}
 
 .mat-mdc-button[disabled] {
   opacity: 0.6;
@@ -17,4 +47,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .flex-between {
   display: flex;
   justify-content: space-between;
+}
+
+.huge-message {
+  font-size: xx-large;
+}
+mat-progress-bar {
+  margin: auto;
+  width: 50%;
 }
