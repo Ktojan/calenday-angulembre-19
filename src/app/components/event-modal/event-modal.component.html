@@ -6,7 +6,7 @@
         <mat-label>Event name</mat-label>
         <input matInput formControlName="title"/>
       </mat-form-field>
-      @if(!data.allDay) {
+      @if(!allDayControl.value) {
       <mat-form-field>
         <mat-label>Choose duration</mat-label>
         <mat-select formControlName="duration" [disabled]="allDayControl.value">

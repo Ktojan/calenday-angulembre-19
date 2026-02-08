@@ -6,7 +6,7 @@ import { IEvent } from './shared/interfaces';
 import { EventsData } from './shared/events-data';
 import { provideHttpClient } from '@angular/common/http';
 
-const mimicHTTPDelaySec = 0.5;
+const mimicHTTPDelaySec = 1.2;
 
 const routes: Routes = [
   {
@@ -34,7 +34,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideAnimationsAsync(),
     importProvidersFrom(
-      InMemoryWebApiModule.forRoot(AppData, { delay: mimicHTTPDelaySec * 500 })
+      InMemoryWebApiModule.forRoot(AppData, { delay: mimicHTTPDelaySec * 1000 })
     )
   ]
 };

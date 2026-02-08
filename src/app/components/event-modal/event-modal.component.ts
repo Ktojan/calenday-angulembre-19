@@ -55,9 +55,7 @@ export class EventModalComponent implements OnInit {
     { value: 8, label: '2 hours' }
   ]
 
-  constructor(
-    private dialogRef: MatDialogRef<EventModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IEvent & ISlot )
+  constructor(private dialogRef: MatDialogRef<EventModalComponent>, @Inject(MAT_DIALOG_DATA) public data: IEvent & ISlot)
   {
       this.eventForm = new FormGroup({
         title: new FormControl(this.data.title || '', [Validators.required]),
@@ -107,14 +105,14 @@ export class EventModalComponent implements OnInit {
     };
     if (this.isEditingMode) eventObject.id = (this.data as IEvent).id;
     this.calendarService.saveEvent(eventObject as IEvent).subscribe();
-    this.closeDialog();
+    this.closeDialog(eventObject as IEvent);
   }
 
   delete() {
     const id = (this.data as IEvent).id;
     if (id) this.calendarService.removeEvent(id).subscribe();
-    this.closeDialog();
+    this.closeDialog(this.data as IEvent);
   }
 
-  closeDialog = () => this.dialogRef.close();
+  closeDialog = (eventObject?: IEvent) => this.dialogRef.close(eventObject);
 }
