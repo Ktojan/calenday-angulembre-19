@@ -14,18 +14,27 @@
         <div class="event-scheduler-time-slot" (click)="clickScheduleArea(slot)" cdkDrag cdkDragDisabled></div>
       }
     </div>
-    @for (event of (events$ | async); track event; let idx = $index, isEven = $even) {
-      <div class="event-scheduler-event-slots" cdkDropList [cdkDropListData]="event"
-           [cdkDropListEnterPredicate]="canDragEventEnter" [ngStyle]="defineStyle(event)">
-        <!--        @if (!event.allDay) {-->
-        <div #eventSlot="cdkDrag" class="event-scheduler-event-slot" cdkDragLockAxis="y" cdkDrag
-             [class.pointer-events-none]="eventSlot._dragRef.isDragging()"
-             (click)="clickScheduleArea(event, true)">
-          {{ event.title }}
+    @defer(when (events$ | async)) {
+      @for (event of (events$ | async); track event;) {
+        <div class="event-scheduler-event-slots" cdkDropList [cdkDropListData]="event"
+             [cdkDropListEnterPredicate]="canDragEventEnter" [ngStyle]="defineStyle(event)">
+          <!--        @if (!event.allDay) {-->
+          <div #eventSlot="cdkDrag" class="event-scheduler-event-slot" cdkDragLockAxis="y" cdkDrag
+               [class.pointer-events-none]="eventSlot._dragRef.isDragging()"
+               (click)="clickScheduleArea(event, true)">
+            @if(isLoading && updatedId === event.id) {
+              <mat-spinner [diameter]="loaderSize"></mat-spinner>
+            } @else {
+              {{ event.title }}
+            }
+          </div>
+          <div *cdkDragPreview class="event-scheduler-event-slot">
+          </div>
         </div>
-        <!--        }-->
-        <div *cdkDragPreview class="event-scheduler-event-slot">
-        </div>
+      }
+    } @placeholder (minimum 1s) {
+      <div class="huge-message">
+        <mat-spinner [diameter]="180" [strokeWidth]="8"></mat-spinner>
       </div>
     }
 
