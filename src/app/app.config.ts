@@ -6,7 +6,7 @@ import { IEvent } from './shared/interfaces';
 import { EventsData } from './shared/events-data';
 import { provideHttpClient } from '@angular/common/http';
 
-const mimicHTTPDelaySec = 1.2;
+const mimicHTTPDelaySec = 0.8;
 
 const routes: Routes = [
   {

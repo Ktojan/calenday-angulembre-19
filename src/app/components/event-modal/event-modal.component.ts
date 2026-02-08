@@ -1,4 +1,4 @@
-import { Component, inject, Inject, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { Component, inject, Inject, NO_ERRORS_SCHEMA } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -20,6 +20,7 @@ import { IEvent, ISlot } from '../../shared/interfaces';
 import { DatePipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-event-modal',
@@ -34,13 +35,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatSelectModule,
     MatCheckboxModule,
-    DatePipe
+    DatePipe,
+    MatTooltipModule
   ],
   templateUrl: './event-modal.component.html',
   styleUrl: './event-modal.component.scss',
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class EventModalComponent implements OnInit {
+export class EventModalComponent {
   eventForm: FormGroup;
   isEditingMode = false;
   calendarService = inject(CalendarService);
@@ -54,6 +56,7 @@ export class EventModalComponent implements OnInit {
     { value: 7, label: '1 h 45 min' },
     { value: 8, label: '2 hours' }
   ]
+  showHint = false;
 
   constructor(private dialogRef: MatDialogRef<EventModalComponent>, @Inject(MAT_DIALOG_DATA) public data: IEvent & ISlot)
   {
@@ -63,7 +66,12 @@ export class EventModalComponent implements OnInit {
         allDay: new FormControl(this.data.allDay || false)
       });
       if ((this.data as IEvent)['id']) this.isEditingMode = true; // means we open existing event
-      if(this.data.allDay) return;
+      const initialAllDay = this.data.allDay;
+      this.allDayControl.valueChanges.subscribe(allDay => {
+        if(allDay) this.eventForm.get('duration').reset();
+        else if(initialAllDay) this.showHint = true;
+      });
+      if(initialAllDay) return;
       if((this.data as IEvent).timeRange && (this.data as IEvent).timeRange.start>87) {
         this.timeOptions = this.timeOptions?.slice(0, 96 - (this.data as IEvent).timeRange?.start)
       } //to limit available durations at the edge of a day
@@ -75,12 +83,6 @@ export class EventModalComponent implements OnInit {
 
   get allDayControl(): FormControl {
     return this.eventForm.get('allDay') as FormControl;
-  }
-
-  ngOnInit(): void {
-    this.allDayControl.valueChanges.subscribe(allDay => {
-      if(allDay) this.eventForm.get('duration').reset();
-    });
   }
 
   saveEvent() {
@@ -95,9 +97,10 @@ export class EventModalComponent implements OnInit {
       eventObject.allDay = true;
     }
     else {
+      const start: number = (this.data as IEvent).timeRange?.start || 1; // in case event was Allday we don't have timeRange and put in at 1
       eventObject.timeRange = this.isEditingMode ? { // editing existing case
-        start: (this.data as IEvent).timeRange?.start,
-        end: (this.data as IEvent).timeRange?.start + slotsNumber
+        start,
+        end: start + slotsNumber
       } : { // create new one case
         start: (this.data as ISlot)['timeSlot'],
         end: (this.data as ISlot)['timeSlot'] + slotsNumber,

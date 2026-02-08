@@ -6,7 +6,12 @@
   --color-yellow: #f1c40f;
   --color-orange: #e67e22;
 
-
+  @include mat.dialog-overrides(( //Modals
+    actions-alignment: 'space-evenly',
+    subhead-color: var(--color-violet),
+    supporting-text-color: var(--color-yellow),
+    content-padding: 20px,
+  ));
   @include mat.progress-bar-overrides((
     active-indicator-color: var(--color-yellow),
     track-color: var(--color-violet),
@@ -21,6 +26,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h3 {
+  color: var(--color-orange);
+  text-align: center;
+}
 
 .mat-mdc-button[disabled] {
   opacity: 0.6;
